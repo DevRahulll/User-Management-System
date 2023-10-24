@@ -1,9 +1,12 @@
 const express=require('express');
 const app=express();
+const dbconnect=require('./config/db.js');
+const router=require('./route/user.route.js');
 
+// database connection
+dbconnect();
 
-app.get('/home',(req,res)=>{
-    res.send('Welcome to <br> <h1>USER-Management-System</h1>');
-})
+app.use(express.json());
+app.use('/',router);
 
 module.exports=app;

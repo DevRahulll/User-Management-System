@@ -1,4 +1,6 @@
 const mongoose=require('mongoose');
+const bcrypt=require("bcryptjs");
+const JWT=require('jsonwebtoken');
 
 const userSchema=new mongoose.Schema({
     name:{
@@ -24,6 +26,23 @@ const userSchema=new mongoose.Schema({
     }
 })
 
-const userModel=mongoose.model("user",userSchema);
+// method to generate Token
+userSchema.methods={
+    jwtToken(){
+        return JWT.sign({id:this._id,username:this.username}),process.env.SECRET,{
+            expiresIn:'24d'
+        }
+    }
+}
 
-module.exports={userModel};
+// to hash Password before saving it
+userSchema.pre("save",async function(next){
+    if(!this.isModified('password')) return next();
+    this.password=await 
+    bcrypt.hash(this.password,12);//hashing password
+    return next();
+})
+
+const UserModel=mongoose.model("user",userSchema);
+
+module.exports={UserModel};

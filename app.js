@@ -9,11 +9,11 @@ const cookieParser = require('cookie-parser');
 // database connection
 dbconnect();
 
-
-app.use(cors({
-    origin: "http://localhost:5500",
-    credentials: true
-}))
+// {
+//     origin: "http://localhost:5500",
+//     credentials: true
+// }
+app.use(cors());
 
 app.use(cookieParser());
 

@@ -5,10 +5,7 @@ const bcrypt = require('bcryptjs');
 
 
 
-// to get into the home Page
-exports.home = (req, res) => {
-    res.send('Welcome to <br> <h1>USER-Management-System</h1><h3>I am Rahul Dev</h3>');
-}
+
 
 // to User Registertion or Sign up
 exports.signup = async (req, res) => {
